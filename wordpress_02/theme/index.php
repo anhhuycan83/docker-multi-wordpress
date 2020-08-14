@@ -1,1 +1,2 @@
-<?php echo "hello world!"; ?>
+<?php
+// Silence is golden.

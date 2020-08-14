@@ -4,7 +4,7 @@ services:
 
   db:
     container_name: $DB_CONTAINER
-    image: mariadb:latest
+    image: mysql:latest
     restart: always
     volumes:
       - /srv/www/${VIRTUAL_HOST}/db_data:/var/lib/mysql

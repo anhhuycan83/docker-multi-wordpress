@@ -1,3 +1,2 @@
-/*
-Plugin Name: Custom Plugin
-*/
+<?php
+// Silence is golden.

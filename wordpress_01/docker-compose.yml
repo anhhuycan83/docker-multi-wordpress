@@ -4,10 +4,11 @@ services:
 
   db:
     container_name: $DB_CONTAINER
-    image: mariadb:latest
+    image: mysql:8.0
     restart: always
     volumes:
       - /srv/www/${VIRTUAL_HOST}/db_data:/var/lib/mysql
+    command: '--default-authentication-plugin=mysql_native_password'
     environment:
       MYSQL_RANDOM_ROOT_PASSWORD: 1
       MYSQL_DATABASE: $DB_NAME

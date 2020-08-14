@@ -20,16 +20,16 @@
 
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define( 'DB_NAME', 'database_name_here' );
+define( 'DB_NAME', 'wp_db_name_01' );
 
 /** MySQL database username */
-define( 'DB_USER', 'username_here' );
+define( 'DB_USER', 'wp_db_user_01' );
 
 /** MySQL database password */
-define( 'DB_PASSWORD', 'password_here' );
+define( 'DB_PASSWORD', 'wp_db_pass_01' );
 
 /** MySQL hostname */
-define( 'DB_HOST', 'localhost' );
+define( 'DB_HOST', 'wp_db_01' );
 
 /** Database Charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8' );
@@ -46,14 +46,14 @@ define( 'DB_COLLATE', '' );
  *
  * @since 2.6.0
  */
-define( 'AUTH_KEY',         'put your unique phrase here' );
-define( 'SECURE_AUTH_KEY',  'put your unique phrase here' );
-define( 'LOGGED_IN_KEY',    'put your unique phrase here' );
-define( 'NONCE_KEY',        'put your unique phrase here' );
-define( 'AUTH_SALT',        'put your unique phrase here' );
-define( 'SECURE_AUTH_SALT', 'put your unique phrase here' );
-define( 'LOGGED_IN_SALT',   'put your unique phrase here' );
-define( 'NONCE_SALT',       'put your unique phrase here' );
+define('AUTH_KEY',         'ymZ[[1-X-u21)P%U~z5saZvU4|O^wXA<rVyf4G7P`H-1Q>sWq|X#XN5]nYP~t H-');
+define('SECURE_AUTH_KEY',  '{jto<>~3%r R2FP*5n)#G5+)8)Nf#TYntPW~zL(w(!6M$.X>vM^x5/lo/C!&CyUP');
+define('LOGGED_IN_KEY',    'B5*,1|PmoxDk+eU)Ib=;P#4+(WisiW8eCamipPnt{rVMXSb]vaKqFSn{Xt9U8V}R');
+define('NONCE_KEY',        '6:4I$,yb-=vC3~E,|@6]G(da@0?83Z1b~R^I+?^]<1aLK}Ei^>|_V;L4i]i2.aoV');
+define('AUTH_SALT',        '7Q>X,Q)BBM,f&~JN6Upvq4_5#6v$Uu|vsQpQ6S-WaQhg=_jzJkrl%LiCLae.^`(]');
+define('SECURE_AUTH_SALT', 'nGs|t,ty&|uTmp-FO7Vd4^RPIZ3Z65q_$:|qTKs0p1?rwlvp9LBZI]F+Jq4]lm]|');
+define('LOGGED_IN_SALT',   '(smsd&`#70wV%+J~NB]N}P?tZ6+.dNt#`a[c/:+xcOe+~hA7r!+T9>Wg,H6^~}Z1');
+define('NONCE_SALT',       'ZiEq&B^Ahtl}sE{nl+)fPs6aJDJF[!iulGHzO^0+kP^f-Y(_ eK7N:k)Z!dq6<uU');
 
 /**#@-*/
 
@@ -84,6 +84,14 @@ define( 'WP_DEBUG', false );
 /** Absolute path to the WordPress directory. */
 if ( ! defined( 'ABSPATH' ) ) {
 	define( 'ABSPATH', dirname( __FILE__ ) . '/' );
+}
+
+/* SSL Settings */
+define('FORCE_SSL_ADMIN', true);
+
+/* Turn HTTPS 'on' if HTTP_X_FORWARDED_PROTO matches 'https' */
+if (strpos($_SERVER['HTTP_X_FORWARDED_PROTO'], 'https') !== false) {
+$_SERVER['HTTPS'] = 'on';
 }
 
 /** Sets up WordPress vars and included files. */
