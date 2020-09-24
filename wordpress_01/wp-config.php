@@ -95,4 +95,6 @@ $_SERVER['HTTPS'] = 'on';
 }
 
 /** Sets up WordPress vars and included files. */
+define( 'UPLOADS', 'wp-content/uploads' );
+
 require_once( ABSPATH . 'wp-settings.php' );

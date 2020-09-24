@@ -5,15 +5,35 @@ services:
   db:
     container_name: $DB_CONTAINER
     image: mysql:8.0
-    restart: always
+    restart: unless-stopped
     volumes:
-      - /srv/www/${VIRTUAL_HOST}/db_data:/var/lib/mysql
-    command: '--default-authentication-plugin=mysql_native_password'
+      - /srv/www/${VIRTUAL_HOST}/db_data:/var/lib/mysql:rw
+    command: '--default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --general-log=1 --general-log-file=/var/log/mysql/general-log.log'
     environment:
-      MYSQL_RANDOM_ROOT_PASSWORD: 1
+      MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: $DB_NAME
       MYSQL_USER: $DB_USER
       MYSQL_PASSWORD: $DB_PASSWORD
+
+  phpmyadmin:
+    container_name: $PHPMYADMIN_CONTAINER
+    image: phpmyadmin/phpmyadmin:5.0.1
+    restart: always
+    depends_on:
+      - db
+    restart: always
+    volumes:
+      - /srv/www/${PHPMYADMIN_VIRTUAL_HOST}/phpmyadmin:/var:rw
+    environment:
+      PMA_HOST: $DB_CONTAINER
+      #PMA_USER: $DB_USER
+      #PMA_PASSWORD: $DB_PASSWORD
+      VIRTUAL_HOST: $PHPMYADMIN_VIRTUAL_HOST
+      VIRTUAL_PORT: $PHPMYADMIN_VIRTUAL_PORT
+      UPLOAD_LIMIT: 10000000
+      LETSENCRYPT_HOST: $PHPMYADMIN_VIRTUAL_HOST
+      LETSENCRYPT_EMAIL: $LETSENCRYPT_EMAIL
+      #LETSENCRYPT_TEST: 'true'
 
   wp:
     container_name: $WP_CONTAINER
@@ -23,9 +43,10 @@ services:
       - cp
     restart: always
     volumes:
-      - ./theme:/var/www/html/wp-content/themes/${WP_THEME}:rw
-      - ./plugin:/var/www/html/wp-content/plugins/${WP_PLUGIN}:rw
-      - /srv/www/${VIRTUAL_HOST}/wp_content:/var/www/html/wp-content:rw
+      #- ./theme:/var/www/html/wp-content/themes/${WP_THEME}:rw
+      #- ./plugin:/var/www/html/wp-content/plugins/${WP_PLUGIN}:rw
+      - /srv/www/${VIRTUAL_HOST}/wp-content:/var/www/html/wp-content:rw
+      - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
     environment:
       WORDPRESS_DB_HOST: $DB_CONTAINER
       WORDPRESS_DB_NAME: $DB_NAME
